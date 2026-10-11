@@ -1,0 +1,33 @@
+<article class="card">
+  <div class="card-image">
+    <a [routerLink]="['/noticia', news().id]"
+      ><img [src]="news().image" [alt]="news().title" loading="lazy" /></a
+    ><span class="category-badge" [attr.data-category]="group(news())">{{
+      news().category
+    }}</span>
+    <button
+      type="button"
+      class="fav-button favorite-overlay"
+      (click)="store.toggleFavorite(news().id)"
+      [attr.aria-pressed]="store.isFavorite(news().id)"
+      [attr.aria-label]="
+        (store.isFavorite(news().id)
+          ? 'Quitar de favoritos: '
+          : 'Agregar a favoritos: ') + news().title
+      "
+    >
+      {{ store.isFavorite(news().id) ? "♥" : "♡" }}
+    </button>
+  </div>
+  <div class="card-content">
+    <h3>
+      <a [routerLink]="['/noticia', news().id]">{{ news().title }}</a>
+    </h3>
+    <p>{{ news().summary }}</p>
+    <div class="card-actions">
+      <span class="card-meta"
+        >{{ news().author }} · {{ news().date | date: "dd/MM/yyyy" }}</span
+      ><a class="text-link" [routerLink]="['/noticia', news().id]">Ver más →</a>
+    </div>
+  </div>
+</article>

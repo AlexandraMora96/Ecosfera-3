@@ -1,0 +1,126 @@
+<section class="shell section contact-page">
+  <div class="contact-heading">
+    <span class="eyebrow">ESTAMOS AQUÍ</span>
+    <h1 class="page-title">Contacto editorial</h1>
+    <p>¿Tienes una historia, propuesta o comentario? Escríbenos.</p>
+  </div>
+  <div class="contact-layout">
+    <form
+      class="panel contact-form"
+      #form="ngForm"
+      (ngSubmit)="submit(form)"
+      novalidate
+    >
+      <h2>Enviar mensaje</h2>
+      <label for="contact-name">Nombre completo</label
+      ><input
+        id="contact-name"
+        placeholder="María García López"
+        name="name"
+        [(ngModel)]="data.name"
+        #name="ngModel"
+        required
+        minlength="2"
+        pattern=".*\S.*"
+        maxlength="80"
+        autocomplete="name"
+      />
+      @if ((name.touched || form.submitted) && name.invalid) {
+        <p class="field-error">Escribe tu nombre (mínimo 2 caracteres).</p>
+      }
+      <label for="contact-email">Correo electrónico</label
+      ><input
+        id="contact-email"
+        placeholder="maria@ejemplo.com"
+        name="email"
+        [(ngModel)]="data.email"
+        #email="ngModel"
+        type="email"
+        required
+        email
+        maxlength="120"
+        autocomplete="email"
+      />
+      @if ((email.touched || form.submitted) && email.invalid) {
+        <p class="field-error">Escribe un correo electrónico válido.</p>
+      }
+      <label for="contact-subject">Asunto</label>
+      <select
+        id="contact-subject"
+        name="subject"
+        [(ngModel)]="data.subject"
+        #subject="ngModel"
+        required
+      >
+        <option value="">Selecciona un asunto…</option>
+        <option>Consultas generales</option>
+        <option>Propuestas editoriales</option>
+        <option>Soporte</option>
+        <option>Prensa</option>
+      </select>
+      @if ((subject.touched || form.submitted) && subject.invalid) {
+        <p class="field-error">Escribe un asunto (mínimo 3 caracteres).</p>
+      }
+      <label for="contact-message">Mensaje</label
+      ><textarea
+        id="contact-message"
+        placeholder="Describe tu propuesta, pregunta o comentario…"
+        name="message"
+        [(ngModel)]="data.message"
+        #message="ngModel"
+        required
+        minlength="10"
+        pattern=".*\S[\s\S]*"
+        maxlength="2000"
+      ></textarea>
+      @if ((message.touched || form.submitted) && message.invalid) {
+        <p class="field-error">Escribe un mensaje de al menos 10 caracteres.</p>
+      }
+      <button class="btn" type="submit">Enviar mensaje</button>
+      <p class="form-message" role="status">{{ confirmation() }}</p>
+    </form>
+    <aside class="contact-sidebar">
+      <div class="contact-information">
+        <h2>Información de contacto</h2>
+        <div class="contact-channel">
+          <span aria-hidden="true"><app-pin /></span>
+          <div>
+            <strong>Oficina editorial</strong>
+            <p>Cra. 7 # 71–21, Torre B, piso 8<br />Bogotá, Colombia</p>
+          </div>
+        </div>
+        <div class="contact-channel">
+          <span aria-hidden="true">✉</span>
+          <div>
+            <strong>Correo institucional</strong>
+            <p>
+              <a href="mailto:redaccion@ecosfera.co">redaccion@ecosfera.co</a>
+            </p>
+          </div>
+        </div>
+        <div class="contact-channel">
+          <span aria-hidden="true">☎</span>
+          <div>
+            <strong>Teléfono</strong>
+            <p><a href="tel:+573028562890">+57 (302) 856 2890</a></p>
+          </div>
+        </div>
+        <div class="contact-channel">
+          <span aria-hidden="true">◷</span>
+          <div>
+            <strong>Horario editorial</strong>
+            <p>Lunes a viernes: 9:00–18:00<br />Sábados: 10:00–14:00</p>
+          </div>
+        </div>
+      </div>
+      <div class="collaboration">
+        <h2>¿Quieres colaborar con periodismo?</h2>
+        <p>
+          Recibimos propuestas sobre turismo, ciencia y naturaleza de
+          periodistas y fotógrafos independientes.
+        </p>
+        <a routerLink="/gestion" class="text-link">Proponer una historia →</a>
+      </div>
+    </aside>
+  </div>
+</section>
